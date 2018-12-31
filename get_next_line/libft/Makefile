@@ -6,7 +6,7 @@
 #    By: lreznak- <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/20 18:37:19 by lreznak-          #+#    #+#              #
-#    Updated: 2018/12/09 23:13:44 by lreznak-         ###   ########.fr        #
+#    Updated: 2018/12/29 17:18:47 by lreznak-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,8 @@ OBJ = *.o
 all: $(NAME)
 
 $(NAME):
-	gcc -c -Wall -Wextra -Werror $(SRC)
-	ar rc $(NAME)  $(OBJ)
+	@gcc -c -Wall -Wextra -Werror $(SRC)
+	@ar rc $(NAME)  $(OBJ)
 clean:
 	rm -f $(OBJ)
 
