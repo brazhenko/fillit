@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   filler.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lreznak- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/01/02 08:32:42 by lreznak-          #+#    #+#             */
+/*   Updated: 2019/01/02 08:56:45 by lreznak-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fillit.h"
 
 static void			print_map(char **map, int sz)
@@ -11,7 +23,7 @@ static void			print_map(char **map, int sz)
 	{
 		while (j < 3 + sz)
 		{
-			write(1, &(map[i][j]), 1);	
+			write(1, &(map[i][j]), 1);
 			j++;
 		}
 		write(1, "\n", 1);
@@ -35,7 +47,8 @@ static char			**coord_allocator(int f_c)
 	return (coordinates);
 }
 
-int					is_able_to_place(char ***map, char **fig, char x, char y, int sz)
+int					is_able_to_place(char ***map, char **fig, char x, \
+														char y, int sz)
 {
 	int		i;
 	int		j;
@@ -57,14 +70,13 @@ int					is_able_to_place(char ***map, char **fig, char x, char y, int sz)
 			j++;
 		}
 		j = 0;
-		// printf("\n");
 		i++;
 	}
 	return (1);
-
 }
 
-int					place_one_figure(char ***map, char **fig, char x, char y, int sz)
+int					place_one_figure(char ***map, char **fig, char x, \
+													char y, int sz)
 {
 	int		i;
 	int		j;
@@ -79,40 +91,42 @@ int					place_one_figure(char ***map, char **fig, char x, char y, int sz)
 		{
 			if (fig[i][j] != '.')
 				(*map)[x + i][y + j] = fig[i][j];
-			// printf("%c", (*map)[x + i][y + i]);
 			j++;
 		}
 		j = 0;
-		// printf("\n");
 		i++;
 	}
 	return (1);
 }
 
-static void			null_coord_vector(char ***c, int f_c, int *sz)
+static void			null_coord_vector(char ***c, int f_c, int *sz, int bar)
 {
-	while (f_c > 1)
+	while (f_c > bar + 1)
 	{
 		(*c)[f_c - 1][0] = 0;
 		(*c)[f_c - 1][1] = 0;
 		f_c--;
 	}
-	if ((*c)[0][0] == *sz + 2 && (*c)[0][1] == *sz + 2)
-   	{
-   		(*sz)++;
-   		// VDS
-
-   		// exit (1);
-   	}
-   	else if ((*c)[0][1] == *sz + 2)
-   	{
-   		(*c)[0][0]++;
-   		(*c)[0][1] = 0;
-   	}
-   	else
-   		(*c)[0][1]++;
-
-
+	if ((*c)[bar][0] == *sz + 2 && (*c)[bar][1] == *sz + 2)
+	{
+		if (bar == 0)
+		{
+			(*c)[0][0] = 0;
+			(*c)[0][1] = 0;
+			(*sz)++;
+		}
+		else
+			null_coord_vector(c, f_c, sz, bar - 1);
+	}
+	else if ((*c)[bar][1] == *sz + 2)
+	{
+		(*c)[bar][0]++;
+		(*c)[bar][1] = 0;
+	}
+	else
+	{
+		(*c)[bar][1]++;
+	}
 }
 
 void				filler(int f_c, int sz, t_dc_list *n)
@@ -121,13 +135,9 @@ void				filler(int f_c, int sz, t_dc_list *n)
 	char				**c;
 
 	map = map_gen();
-	print_map(map, sz);
-	printf("\n");
-	c = coord_allocator(f_c);	
-	// c[0][0] = 3;
-	// c[0][1] = 3;
-
-	// printf("X: %c, Y: %c", c[n->sign - 'A'][0] + '0', c[n->sign - 'A'][1] + '0');
+	// print_map(map, sz);
+	// printf("\n");
+	c = coord_allocator(f_c);
 	while (n)
 	{
 		while (!place_one_figure(&map, n->figure, c[n->sign - 'A'][0], \
@@ -135,11 +145,10 @@ void				filler(int f_c, int sz, t_dc_list *n)
 		{
 			if (c[n->sign - 'A'][0] == sz + 2 && c[n->sign - 'A'][1] == sz + 2)
 			{
-				write(1, "HUI!\n", 5);
-				print_map(map, sz);
-				null_coord_vector(&c, f_c, &sz);
-				dcl_rewind(&n);
-				// exit (1);
+				null_coord_vector(&c, f_c, &sz, n->sign - 'A');
+				if (n->sign != 'A')
+					n = n->prev;
+				map_eraser(&map, n->sign - 1, sz);
 			}
 			else if (c[n->sign - 'A'][1] == sz + 2)
 			{
@@ -152,5 +161,4 @@ void				filler(int f_c, int sz, t_dc_list *n)
 		n = n->next;
 	}
 	print_map(map, sz);
-	// return (1);
 }

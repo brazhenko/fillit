@@ -6,7 +6,7 @@
 /*   By: hharrold <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/31 01:35:49 by hharrold          #+#    #+#             */
-/*   Updated: 2018/12/31 10:31:42 by hharrold         ###   ########.fr       */
+/*   Updated: 2019/01/02 06:18:18 by lreznak-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct				s_dc_list
 	char				**figure;
 }							t_dc_list;
 
+int							min_sz(int f_c);
 int							val_one_figure(char **fig);
 int							check_n_fill(int fd, t_dc_list **node);
 char						**map_gen(void);
@@ -35,5 +36,6 @@ void						forward_printer(t_dc_list **fig);
 char						**cutter(char* str, int f_c);
 void						filler(int f_c, int sz, t_dc_list *node);
 void						dcl_rewind(t_dc_list **node);
+void						map_eraser(char ***map, char sign, int sz);
 
 #endif

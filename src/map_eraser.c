@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dcl_new.c                                          :+:      :+:    :+:   */
+/*   map_eraser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hharrold <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/30 22:07:31 by hharrold          #+#    #+#             */
-/*   Updated: 2019/01/02 08:56:44 by lreznak-         ###   ########.fr       */
+/*   Created: 2019/01/02 00:29:37 by hharrold          #+#    #+#             */
+/*   Updated: 2019/01/02 08:39:38 by lreznak-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
-
-t_dc_list		*dcl_new(char **str)
+void		map_eraser(char ***map, char sign, int sz)
 {
-	t_dc_list	*new;
+	int		i;
+	int		j;
 
-	if (!(new = (t_dc_list *)malloc(sizeof(t_dc_list))))
-		return (NULL);
-	new->next = NULL;
-	new->prev = NULL;
-	new->sign = 'A';
-	new->figure = str;
-	return (new);
+	i = 3;
+	j = 3;
+	while (i < sz + 3)
+	{
+		while (j < sz + 3)
+		{
+			if ((*map)[i][j] > sign)
+			{
+				(*map)[i][j] = '.';
+			}
+			j += 1;
+		}
+		j = 0;
+		i += 1;
+	}
 }

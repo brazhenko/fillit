@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dcl_new.c                                          :+:      :+:    :+:   */
+/*   min_sz.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hharrold <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/30 22:07:31 by hharrold          #+#    #+#             */
-/*   Updated: 2019/01/02 08:56:44 by lreznak-         ###   ########.fr       */
+/*   Created: 2019/01/01 21:45:15 by hharrold          #+#    #+#             */
+/*   Updated: 2019/01/02 00:07:24 by lreznak-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
-
-t_dc_list		*dcl_new(char **str)
+int						min_sz(int f_c)
 {
-	t_dc_list	*new;
+	int			i;
 
-	if (!(new = (t_dc_list *)malloc(sizeof(t_dc_list))))
-		return (NULL);
-	new->next = NULL;
-	new->prev = NULL;
-	new->sign = 'A';
-	new->figure = str;
-	return (new);
+	i = 0;
+	f_c *= 4;
+	while (i * i < f_c)
+		i++;
+	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: lreznak- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/30 22:00:06 by lreznak-          #+#    #+#             */
-/*   Updated: 2018/12/31 01:49:55 by lreznak-         ###   ########.fr       */
+/*   Updated: 2019/01/01 23:14:57 by lreznak-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int				val_one_figure(char **fig)
 	}
 	if (count == 4 && val_neig_vector(fill_vector))
 	{
-		printf("%s\n", fill_vector);
+		printf("VAL ONE FIGURE: %s\n", fill_vector);
 		return (1);
 	}
 	return (0);
