@@ -6,11 +6,11 @@
 /*   By: lreznak- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 19:42:50 by lreznak-          #+#    #+#             */
-/*   Updated: 2018/12/24 11:24:49 by lreznak-         ###   ########.fr       */
+/*   Updated: 2019/01/03 01:12:49 by hharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>

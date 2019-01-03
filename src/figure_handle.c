@@ -6,7 +6,7 @@
 /*   By: lreznak- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 18:10:08 by lreznak-          #+#    #+#             */
-/*   Updated: 2019/01/02 08:38:29 by lreznak-         ###   ########.fr       */
+/*   Updated: 2019/01/02 22:34:35 by lreznak-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static int		figures_handle(char *figures, t_dc_list **fv, int *f_c)
 	fig_cpy = figures;
 	fig_count = ft_strlen(figures) / 16;
 	*f_c = fig_count;
-	printf("FIGURE HANDLE: %s\n", figures);
 	fig_v = cutter(figures, fig_count);
 	while (*fig_v)
 	{

@@ -6,7 +6,7 @@
 /*   By: lreznak- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/02 08:32:42 by lreznak-          #+#    #+#             */
-/*   Updated: 2019/01/02 08:56:45 by lreznak-         ###   ########.fr       */
+/*   Updated: 2019/01/03 01:22:30 by hharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,8 @@ static void			print_map(char **map, int sz)
 	}
 }
 
-static char			**coord_allocator(int f_c)
-{
-	char				**coordinates;
-
-	coordinates = (char **)malloc(f_c * sizeof(char *));
-	while (f_c)
-	{
-		coordinates[f_c - 1] = (char *)malloc(2);
-		coordinates[f_c - 1][0] = 0;
-		coordinates[f_c - 1][1] = 0;
-		f_c--;
-	}
-	return (coordinates);
-}
-
-int					is_able_to_place(char ***map, char **fig, char x, \
-														char y, int sz)
+static int			is_able_to_place(char ***map, char **fig, char *c, \
+																int sz)
 {
 	int		i;
 	int		j;
@@ -59,12 +44,12 @@ int					is_able_to_place(char ***map, char **fig, char x, \
 	{
 		while (j < 4)
 		{
-			if (((*map)[x + i][y + j] != '.' && fig[i][j] != '.'))
+			if (((*map)[c[0] + i][c[1] + j] != '.' && fig[i][j] != '.'))
 				return (0);
 			else if (fig[i][j] != '.')
 			{
-				if ((x + i) < 3 || 2 + sz < (x + i) \
-					|| (y + j) < 3 || 2 + sz < (y + j))
+				if ((c[0] + i) < 3 || 2 + sz < (c[0] + i) \
+					|| (c[1] + j) < 3 || 2 + sz < (c[1] + j))
 					return (0);
 			}
 			j++;
@@ -75,22 +60,22 @@ int					is_able_to_place(char ***map, char **fig, char x, \
 	return (1);
 }
 
-int					place_one_figure(char ***map, char **fig, char x, \
-													char y, int sz)
+static int			place_one_figure(char ***map, char **fig, char *c, \
+															int sz)
 {
 	int		i;
 	int		j;
 
 	i = 0;
 	j = 0;
-	if (is_able_to_place(map, fig, x, y, sz) == 0)
+	if (is_able_to_place(map, fig, c, sz) == 0)
 		return (0);
 	while (i < 4)
 	{
 		while (j < 4)
 		{
 			if (fig[i][j] != '.')
-				(*map)[x + i][y + j] = fig[i][j];
+				(*map)[c[0] + i][c[1] + j] = fig[i][j];
 			j++;
 		}
 		j = 0;
@@ -124,24 +109,17 @@ static void			null_coord_vector(char ***c, int f_c, int *sz, int bar)
 		(*c)[bar][1] = 0;
 	}
 	else
-	{
 		(*c)[bar][1]++;
-	}
 }
 
-void				filler(int f_c, int sz, t_dc_list *n)
+void				filler(int f_c, int sz, t_dc_list *n, char **c)
 {
 	static char			**map;
-	char				**c;
 
 	map = map_gen();
-	// print_map(map, sz);
-	// printf("\n");
-	c = coord_allocator(f_c);
 	while (n)
 	{
-		while (!place_one_figure(&map, n->figure, c[n->sign - 'A'][0], \
-				c[n->sign - 'A'][1], sz))
+		while (!place_one_figure(&map, n->figure, c[n->sign - 'A'], sz))
 		{
 			if (c[n->sign - 'A'][0] == sz + 2 && c[n->sign - 'A'][1] == sz + 2)
 			{

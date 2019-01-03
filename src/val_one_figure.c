@@ -6,7 +6,7 @@
 /*   By: lreznak- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/30 22:00:06 by lreznak-          #+#    #+#             */
-/*   Updated: 2019/01/01 23:14:57 by lreznak-         ###   ########.fr       */
+/*   Updated: 2019/01/03 00:11:46 by lreznak-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,26 @@ static int		val_neig_vector(char *v)
 	return (0);
 }
 
+static void		hash_handle(char ***fig, int *i, int *j, int *one_cell_c)
+{
+	if (val_coors(*i + 1, *j) && (*fig)[*i + 1][*j] == '#')
+		(*one_cell_c)++;
+	if (val_coors(*i, *j + 1) && (*fig)[*i][*j + 1] == '#')
+		(*one_cell_c)++;
+	if (val_coors(*i - 1, *j) && (*fig)[*i - 1][*j] == '#')
+		(*one_cell_c)++;
+	if (val_coors(*i, *j - 1) && (*fig)[*i][*j - 1] == '#')
+		(*one_cell_c)++;
+}
+
+static void		var_nuller(int *i, int *j, int *count, int *one_cell_c)
+{
+	*i = -1;
+	*j = -1;
+	*count = 0;
+	*one_cell_c = 0;
+}
+
 int				val_one_figure(char **fig)
 {
 	int		i;
@@ -55,41 +75,23 @@ int				val_one_figure(char **fig)
 	int		one_cell_c;
 	char	*fill_vector;
 
-	i = 0;
-	j = 0;
-	count = 0;
-	one_cell_c = 0;
-	fill_vector = (char *)malloc(5);
-	ft_bzero((void *)fill_vector, 5);
-	while (i < 4)
+	var_nuller(&i, &j, &count, &one_cell_c);
+	fill_vector = ft_strnew(5);
+	while (++i < 4)
 	{
-		while (j < 4)
+		while (++j < 4)
 		{
 			if (fig[i][j] == '#')
 			{
-				if (val_coors(i + 1, j) && fig[i + 1][j] == '#')
-					one_cell_c++;
-				if (val_coors(i, j + 1) && fig[i][j + 1] == '#')
-					one_cell_c++;
-				if (val_coors(i - 1, j) && fig[i - 1][j] == '#')
-					one_cell_c++;
-				if (val_coors(i, j - 1) && fig[i][j - 1] == '#')
-					one_cell_c++;
-				{
-					count++;
-					fill_vector[count - 1] = one_cell_c + '0';
-				}
+				hash_handle(&fig, &i, &j, &one_cell_c);
+				count++;
+				fill_vector[count - 1] = one_cell_c + '0';
 			}
-			j++;
 			one_cell_c = 0;
 		}
-		j = 0;
-		i++;
+		j = -1;
 	}
 	if (count == 4 && val_neig_vector(fill_vector))
-	{
-		printf("VAL ONE FIGURE: %s\n", fill_vector);
 		return (1);
-	}
 	return (0);
 }

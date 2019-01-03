@@ -6,7 +6,7 @@
 /*   By: lreznak- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 18:19:29 by lreznak-          #+#    #+#             */
-/*   Updated: 2018/12/24 01:02:28 by lreznak-         ###   ########.fr       */
+/*   Updated: 2019/01/03 01:17:22 by hharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
+# define FD_MAX 10000
+# define BUFF_SIZE 7
 
 typedef struct		s_list
 {
@@ -32,6 +34,12 @@ typedef struct		s_dcl
 	struct s_dcl							*next;
 	struct s_dcl							*previous;
 }					t_dcl;
+
+typedef	struct		s_string
+{
+	char	*text;
+	char	*begin;
+}					t_string;
 
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);
@@ -99,6 +107,7 @@ void				ft_putnbr(int n);
 void				ft_putnbr_fd(int n, int fd);
 void				ft_putstr_fd(char const *s, int fd);
 void				ft_putendl_fd(char const *s, int fd);
+int					get_next_line(const int fd, char **line);
 
 int					dcl_rpn(t_dcl *elem);
 

@@ -6,7 +6,7 @@
 #    By: lreznak- <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/20 18:37:19 by lreznak-          #+#    #+#              #
-#    Updated: 2018/12/29 17:18:47 by lreznak-         ###   ########.fr        #
+#    Updated: 2019/01/03 01:12:21 by hharrold         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRC = \
 	ft_putendl.c ft_putendl_fd.c ft_putnbr.c ft_putnbr_fd.c ft_putstr.c ft_putstr_fd.c ft_strcat.c ft_strchr.c ft_strclr.c \
 	ft_strcmp.c ft_strcpy.c ft_strdel.c ft_strdup.c ft_strequ.c  ft_striter.c ft_striteri.c ft_strjoin.c ft_strlcat.c \
 	ft_strlen.c ft_strmap.c ft_strmapi.c ft_strncat.c ft_strncmp.c ft_strncpy.c ft_strnequ.c ft_strnew.c ft_strnstr.c \
-	ft_strrchr.c ft_strsplit.c ft_strstr.c ft_strsub.c ft_strtrim.c ft_tolower.c ft_toupper.c is_left_orient.c make_rpn.c \
+	ft_strrchr.c ft_strsplit.c ft_strstr.c ft_strsub.c ft_strtrim.c ft_tolower.c ft_toupper.c is_left_orient.c make_rpn.c get_next_line.c \
 
 OBJ = *.o
 

@@ -6,7 +6,7 @@
 #    By: lreznak- <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/29 17:05:03 by lreznak-          #+#    #+#              #
-#    Updated: 2019/01/02 08:56:42 by lreznak-         ###   ########.fr        #
+#    Updated: 2019/01/03 03:49:32 by lreznak-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,18 +16,18 @@ INC		= -Iinclude
 OBJ		= object
 EXE		= exe
 GNL		= get_next_line
-LFT		= $(GNL)/libft
+LFT		= libft
 
 all: $(NAME)
 
 $(NAME):
-	@cd get_next_line/libft && make && cd ../..
-	@gcc -Og -Wall -Wextra -Werror \
+	@cd $(LFT) && make && cd -
+	@gcc -Wall -Wextra -Werror \
 	$(INC) $(SRC)/fillit.c $(SRC)/figure_handle.c $(SRC)/val_one_figure.c \
-	$(SRC)/dcl_add.c $(SRC)/dcl_new.c $(SRC)/figure_create.c $(SRC)/forward_printer.c \
+	$(SRC)/dcl_add.c $(SRC)/dcl_new.c $(SRC)/figure_create.c \
 	$(SRC)/cutter.c $(SRC)/filler.c $(SRC)/map.c $(SRC)/val.c $(SRC)/dcl_rewind.c $(SRC)/min_sz.c \
 	$(SRC)/map_eraser.c \
-	$(GNL)/get_next_line.c $(LFT)/libft.a \
+	$(LFT)/libft.a \
 	-o $(NAME)
 	@echo COMPILED!
 
